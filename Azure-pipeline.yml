@@ -17,3 +17,15 @@ steps:
   displayName: 'Run Playwright tests'
   env:
     CI: 'true'
+- task: PublishPipelineArtifact@1
+  inputs:
+    targetPath: '$(Pipeline.Workspace)'
+    publishLocation: 'pipeline'
+  condition: always()
+
+- task: PublishTestResults@2
+  inputs:
+    testResultsFormat: 'JUnit'
+    testResultsFiles: '**/TEST.xml'
+    testRunTitle: 'REPORTS'
+    
